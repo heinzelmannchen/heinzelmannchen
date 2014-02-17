@@ -1,9 +1,11 @@
-var assert = require("assert")
+var should = require("should")
 describe('Test Travis', function() {
-    describe('#indexOf()', function() {
-        it('should return -1 when the value is not present', function() {
-            assert.equal(-1, [1, 2, 3].indexOf(5));
-            assert.equal(-1, [1, 2, 3].indexOf(0));
+    describe('ShouldJs', function() {
+        it('true should be true', function() {
+            (true).should.be.true;
+        })
+        it('true should be true', function() {
+            (1).should.be.a.Number;
         })
     })
 })
