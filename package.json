@@ -27,6 +27,7 @@
     "sinon": "~1.8.2"
   },
   "dependencies": {
-    "q": "~1.0.1"
+    "q": "~1.0.1",
+    "heinzelmannchen-npm": "git://github.com/heinzelmannchen/heinzelmannchen-npm.git#master"
   }
 }
