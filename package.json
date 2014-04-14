@@ -26,5 +26,8 @@
     "mocha-jshint": "0.0.7",
     "sinon-chai": "~2.5.0",
     "sinon": "~1.8.2"
+  },
+  "dependencies": {
+    "q": "~1.0.1"
   }
 }
