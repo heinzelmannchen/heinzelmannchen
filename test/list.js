@@ -9,7 +9,7 @@ describe('list', function() {
                 }
             };
 
-            return list.listGenerators(config).should.become('pg');
+            return list.listGenerators(config).should.become(['pg']);
         });
 
         it('should list a generator which is specified as an object', function() {
@@ -24,7 +24,27 @@ describe('list', function() {
                 }
             };
 
-            return list.listGenerators(config).should.become('mysql');
+            return list.listGenerators(config).should.become(['mysql']);
+        });
+
+        it('should list multiple generators (specified as objects or strings)', function() {
+            var config = {
+                generators: {
+                    mysql: {
+                        npm: 'heinzelmannchen-gen-mysql',
+                        config: {
+                            user: 'user'
+                        }
+                    },
+                    pg: 'http://yourrepo.com/pg.git#1.0.1',
+                    inline: {
+                        test: 'test'
+                    },
+                    json: '...'
+                }
+            };
+
+            return list.listGenerators(config).should.become(['mysql', 'pg', 'inline', 'json']);
         });
 
     });
