@@ -1,4 +1,6 @@
-﻿var list = require('../lib/list');
+﻿var list = require('../lib/list')({
+    Q : require('q')
+});
 
 describe('list', function() {
     describe('#list', function() {
