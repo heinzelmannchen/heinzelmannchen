@@ -3,33 +3,28 @@
 describe('list', function() {
     describe('#listGenerators', function() {
         it('should list a generator which is specified as a string (his git url)', function() {
-            var config = {
-                generators: {
+            var generators = {
                     pg: 'http://yourrepo.com/pg.git#1.0.1'
-                }
-            };
+                };
 
-            return list.listGenerators(config).should.become(['pg']);
+            return list.listGenerators(generators).should.become(['pg']);
         });
 
         it('should list a generator which is specified as an object', function() {
-            var config = {
-                generators: {
+            var generators = {
                     mysql: {
                         npm: 'heinzelmannchen-gen-mysql',
                         config: {
                             user: 'user'
                         }
                     }
-                }
-            };
+                };
 
-            return list.listGenerators(config).should.become(['mysql']);
+            return list.listGenerators(generators).should.become(['mysql']);
         });
 
         it('should list multiple generators (specified as objects or strings)', function() {
-            var config = {
-                generators: {
+            var generators = {
                     mysql: {
                         npm: 'heinzelmannchen-gen-mysql',
                         config: {
@@ -41,10 +36,9 @@ describe('list', function() {
                         test: 'test'
                     },
                     json: '...'
-                }
-            };
+                };
 
-            return list.listGenerators(config).should.become(['mysql', 'pg', 'inline', 'json']);
+            return list.listGenerators(generators).should.become(['mysql', 'pg', 'inline', 'json']);
         });
 
     });
