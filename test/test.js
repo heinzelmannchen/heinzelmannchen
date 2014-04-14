@@ -1,11 +1,14 @@
-var should = require("should")
+var heinzel = require('../heinzel');
+
+require('mocha-as-promised')();
+
 describe('Test Travis', function() {
     describe('ShouldJs', function() {
         it('true should be true', function() {
-            (true).should.be.true;
-        })
+            return true.should.be.true;
+        });
         it('true should be true', function() {
-            (1).should.be.a.Number;
-        })
-    })
-})
+            return (1).should.be.a.Number;
+        });
+    });
+});
