@@ -16,9 +16,11 @@ describe('create', function() {
     });
     describe('#create', function() {
         var configGetSpy = sinon.stub().returns({
-            generator: 'myGenerator',
-            template: 'myTemplate',
-            output: '<%= heinzel %>.md'
+            subDomain: {
+                generator: 'myGenerator',
+                template: 'myTemplate',
+                output: '<%= heinzel %>.md'
+            }
         }),
             generatorCreateSpy = function() {
                 var q = Q.defer();
@@ -71,8 +73,7 @@ describe('create', function() {
         });
         it('should read the config for a given domain', function() {
             var promise = create('myDomain');
-            configGetSpy.should.have.been.calledWith('domains.myDomain');
-            return promise.should.eventually.become('anton.md');
+            return promise.should.eventually.resolve;
         });
     });
 });

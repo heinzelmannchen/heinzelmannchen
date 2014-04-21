@@ -1,4 +1,6 @@
 var heinzel = require('../heinzel');
 heinzel.create('extViews.formView').then(function() {
-    console.log('installed');
+    console.log('done');
+}).fail(function() {
+    console.error('fu');
 });

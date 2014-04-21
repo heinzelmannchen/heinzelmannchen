@@ -2,6 +2,7 @@
     "domains": {
         "extViews": {
             "formView": {
+                "template": "heinzelmannchen-template/examples/simpleTemplate.tpl",
                 "output": "{{ tablename }}.js",
                 "generator": {
                     "name": "heinzelmannchen-gen-pg",
