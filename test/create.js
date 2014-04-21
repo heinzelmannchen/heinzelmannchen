@@ -15,7 +15,9 @@ describe('create', function() {
     });
     describe('#create', function() {
         var configGetSpy = sinon.stub().returns({
-            generator: 'myGenerator'
+            generator: 'myGenerator',
+            template: 'myTemplate',
+            output: '<%= heinzel %>.md'
         }),
             generatorCreateSpy = function() {
                 var q = Q.defer();
@@ -27,6 +29,19 @@ describe('create', function() {
             templateSpy = function() {
                 var q = Q.defer();
                 q.resolve('Hello anton');
+                return q.promise;
+            },
+            writeSpy = function(output, content, options) {
+                var q = Q.defer();
+                output.should.be.eql('<%= heinzel %>.md');
+                content.should.be.eql('Hello anton');
+                options.should.be.eql({
+                    data: {
+                        heinzel: 'anton'
+                    },
+                    force: true
+                });
+                q.resolve('anton.md');
                 return q.promise;
             },
             create;
@@ -43,7 +58,8 @@ describe('create', function() {
                     get: configGetSpy
                 },
                 template: {
-                    template: templateSpy
+                    template: templateSpy,
+                    write: writeSpy
                 },
                 Q: Q
             }).create;
@@ -51,7 +67,7 @@ describe('create', function() {
         it('should read the config for a given domain', function() {
             var promise = create('myDomain');
             configGetSpy.should.have.been.calledWith('myDomain');
-            return promise.should.eventually.become('Hello anton');
+            return promise.should.eventually.become('anton.md');
         });
     });
 });
