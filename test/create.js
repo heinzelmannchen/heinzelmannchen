@@ -51,8 +51,11 @@ describe('create', function() {
                 warnOnReplace: false,
                 warnOnUnregistered: false
             });
-            mockery.registerMock('myGenerator', {
-                createData: generatorCreateSpy
+            mockery.registerMock('myGenerator', function() {
+                return {
+                    setConfig: function() {},
+                    createData: generatorCreateSpy
+                };
             });
             create = new Create({
                 config: {
@@ -68,7 +71,7 @@ describe('create', function() {
         });
         it('should read the config for a given domain', function() {
             var promise = create('myDomain');
-            configGetSpy.should.have.been.calledWith('myDomain');
+            configGetSpy.should.have.been.calledWith('domains.myDomain');
             return promise.should.eventually.become('anton.md');
         });
     });

@@ -17,8 +17,6 @@ _.extend(pub, new Search(_.extend(dependancies, {
 })));
 
 _.extend(pub, new Install(_.extend(dependancies, {
-    Q: Q,
-    _: _,
     npm: heinzelNpm
 })));
 

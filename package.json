@@ -25,10 +25,13 @@
     "mocha-jshint": "0.0.7",
     "sinon-chai": "~2.5.0",
     "sinon": "~1.8.2",
-    "mockery": "~1.4.0"
+    "mockery": "~1.4.0",
+    "heinzelmannchen-gen-pg": "git://github.com/heinzelmannchen/heinzelmannchen-gen-pg"
   },
   "dependencies": {
     "q": "~1.0.1",
-    "heinzelmannchen-npm": "git://github.com/heinzelmannchen/heinzelmannchen-npm.git#master"
+    "heinzelmannchen-npm": "git://github.com/heinzelmannchen/heinzelmannchen-npm",
+    "heinzelmannchen-config": "git://github.com/heinzelmannchen/heinzelmannchen-config",
+    "heinzelmannchen-template": "git://github.com/heinzelmannchen/heinzelmannchen-template"
   }
 }

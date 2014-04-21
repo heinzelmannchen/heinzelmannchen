@@ -1,0 +1,25 @@
+{
+    "domains": {
+        "extViews": {
+            "formView": {
+                "output": "{{ tablename }}.js",
+                "generator": "heinzelmannchen-gen-pg"
+            }
+        }
+    },
+    "generators": {
+        "heinzelmannchen-gen-pg": {
+            "npm": "heinzelmannchen-gen-pg",
+            "config": {
+                "charset": "utf8",
+                "database": "heinzel",
+                "host": "127.0.0.1",
+                "password": "anton",
+                "user": "anton"
+            }
+        }
+    },
+    "templates": {
+        "formView": "http://yourrepo.com/formView.git#1.0.1"
+    }
+}
