@@ -1,11 +1,18 @@
-var me = module.exports,
+var pub = module.exports,
     Q = require('q'),
     _ = require('underscore'),
     heinzelNpm = require('heinzelmannchen-npm'),
-    search = require('./lib/search')({
-        Q: Q,
-        _: _,
-        npm: heinzelNpm
-    });
+    Search = require('./lib/search'),
+    Install = require('./lib/install');
 
-me.search = search.search;
+_.extend(pub, new Search({
+    Q: Q,
+    _: _,
+    npm: heinzelNpm
+}));
+
+_.extend(pub, new Install({
+    Q: Q,
+    _: _,
+    npm: heinzelNpm
+}));
