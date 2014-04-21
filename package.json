@@ -24,7 +24,8 @@
     "chai-fuzzy": "~1.4.0",
     "mocha-jshint": "0.0.7",
     "sinon-chai": "~2.5.0",
-    "sinon": "~1.8.2"
+    "sinon": "~1.8.2",
+    "mockery": "~1.4.0"
   },
   "dependencies": {
     "q": "~1.0.1",
