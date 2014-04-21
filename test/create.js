@@ -1,7 +1,8 @@
 ﻿var Create = require('../lib/create'),
     mockery = require('mockery'),
     sinon = require('sinon'),
-    Q = require('q');
+    Q = require('q'),
+    _ = require('underscore');
 
 describe('create', function() {
     describe('interface', function() {
@@ -61,7 +62,8 @@ describe('create', function() {
                     template: templateSpy,
                     write: writeSpy
                 },
-                Q: Q
+                Q: Q,
+                _: _
             }).create;
         });
         it('should read the config for a given domain', function() {
