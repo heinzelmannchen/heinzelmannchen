@@ -10,7 +10,8 @@
                         "database": "heinzel"
                     }
                 }
-            }
+            },
+            "output": "<%= table_name %>.txt"
         }
     },
     "generators": {
