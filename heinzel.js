@@ -6,6 +6,7 @@ var pub = module.exports,
     heinzelTemplate = require('heinzelmannchen-template'),
     mixin = require('./lib/mixin'),
     Search = require('./lib/search'),
+    List = require('./lib/list'),
     Install = require('./lib/install'),
     Create = require('./lib/create');
 
@@ -17,6 +18,11 @@ pub.mixin = mixin({
 pub.mixin(Search)
     .inject({
         npm: heinzelNpm
+    });
+
+pub.mixin(List)
+    .inject({
+        config: heinzelConfig
     });
 
 pub.mixin(Install)
