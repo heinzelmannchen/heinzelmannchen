@@ -12,15 +12,20 @@ var pub = module.exports,
         _: _
     };
 
-_.extend(pub, new Search(_.extend(dependancies, {
+mixin(Search, {
     npm: heinzelNpm
-})));
+});
 
-_.extend(pub, new Install(_.extend(dependancies, {
+mixin(Install, {
     npm: heinzelNpm
-})));
+});
 
-_.extend(pub, new Create(_.extend(dependancies, {
+mixin(Create, {
     template: heinzelTemplate,
     config: heinzelConfig
-})));
+});
+
+
+function mixin(klass, additionalDependancies) {
+    _.extend(pub, klass(_.extend(dependancies, additionalDependancies)));
+}
