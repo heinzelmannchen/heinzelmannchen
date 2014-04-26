@@ -7,13 +7,12 @@ var pub = module.exports,
     mixin = require('./lib/mixin'),
     Search = require('./lib/search'),
     Install = require('./lib/install'),
-    Create = require('./lib/create'),
-    DEPENDANCIES = {
-        Q: Q,
-        _: _
-    };
+    Create = require('./lib/create');
 
-pub.mixin = mixin(DEPENDANCIES);
+pub.mixin = mixin({
+    Q: Q,
+    _: _
+});
 
 pub.mixin(Search)
     .inject({
