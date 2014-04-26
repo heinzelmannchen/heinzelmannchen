@@ -7,7 +7,7 @@ var pub = module.exports,
     Search = require('./lib/search'),
     Install = require('./lib/install'),
     Create = require('./lib/create'),
-    dependancies = {
+    DEPENDANCIES = {
         Q: Q,
         _: _
     };
@@ -31,8 +31,8 @@ mixin(Create)
 
 function mixin(klass) {
     return {
-        inject: function(additionalDependancies) {
-            _.extend(pub, klass(_.extend(dependancies, additionalDependancies)));
+        inject: function(dependancies) {
+            _.extend(pub, klass(_.extend(DEPENDANCIES, dependancies)));
         }
     };
 }
