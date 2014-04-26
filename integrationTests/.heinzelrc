@@ -3,7 +3,6 @@
         "extViews": {
             "formView": {
                 "template": "heinzelmannchen-template/examples/tableTemplate.tpl",
-                "output": "./foo/bar/<%= table_name %>.md",
                 "generator": {
                     "name": "heinzelmannchen-gen-pg",
                     "config": {
@@ -11,7 +10,7 @@
                     }
                 }
             },
-            "output": "<%= table_name %>.txt"
+            "output": "./foo/bar/<%= table_name %>.md"
         }
     },
     "generators": {
