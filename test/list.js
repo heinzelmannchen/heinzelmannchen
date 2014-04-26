@@ -17,7 +17,7 @@ describe('list', function() {
                     pg: 'http://yourrepo.com/pg.git#1.0.1'
                 };
 
-                return list.list('generators').should.become(['pg']);
+                return list.listGenerators().should.become(['pg']);
             });
 
             it('should list a generator which is specified as an object', function() {
@@ -30,7 +30,7 @@ describe('list', function() {
                     }
                 };
 
-                return list.list('generators').should.become(['mysql']);
+                return list.listGenerators().should.become(['mysql']);
             });
 
             it('should list multiple generators (specified as objects or strings)', function() {
@@ -48,7 +48,7 @@ describe('list', function() {
                     json: '...'
                 };
 
-                return list.list('generators').should.become(['mysql', 'pg', 'inline', 'json']);
+                return list.listGenerators().should.become(['mysql', 'pg', 'inline', 'json']);
             });
         });
 
@@ -61,7 +61,7 @@ describe('list', function() {
                     listBackend: 'http://yourrepo.com/listBackend.git#4.0.1'
                 };
 
-                return list.list('templates').should.become(['formView', 'listView', 'listController', 'listBackend']);
+                return list.listTemplates().should.become(['formView', 'listView', 'listController', 'listBackend']);
             });
         });
 
@@ -80,7 +80,7 @@ describe('list', function() {
                     }
                 };
 
-                return list.list('domains').should.become(['extViews', 'backend']);
+                return list.listDomains().should.become(['extViews', 'backend']);
             });
         });
     });

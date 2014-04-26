@@ -26,6 +26,7 @@
         }
     },
     "templates": {
-        "formView": "http://yourrepo.com/formView.git#1.0.1"
+        "formView": "http://yourrepo.com/formView.git#1.0.1",
+        "foobar": "http://yourrepo.com/formView.git#1.0.1"
     }
 }
