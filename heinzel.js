@@ -12,27 +12,28 @@ var pub = module.exports,
         _: _
     };
 
-mixin(Search)
+pub.mixin = function(klass) {
+    return {
+        inject: function(dependancies) {
+            _.extend(pub, klass(_.extend(DEPENDANCIES, dependancies)));
+        }
+    };
+};
+
+pub.mixin(Search)
     .inject({
         npm: heinzelNpm
     });
 
-mixin(Install)
+pub.mixin(Install)
     .inject({
         npm: heinzelNpm
     });
 
-mixin(Create)
+pub.mixin(Create)
     .inject({
         template: heinzelTemplate,
         config: heinzelConfig
     });
 
 
-function mixin(klass) {
-    return {
-        inject: function(dependancies) {
-            _.extend(pub, klass(_.extend(DEPENDANCIES, dependancies)));
-        }
-    };
-}
