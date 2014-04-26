@@ -4,6 +4,7 @@ var pub = module.exports,
     heinzelNpm = require('heinzelmannchen-npm'),
     heinzelConfig = require('heinzelmannchen-config'),
     heinzelTemplate = require('heinzelmannchen-template'),
+    mixin = require('./lib/mixin'),
     Search = require('./lib/search'),
     Install = require('./lib/install'),
     Create = require('./lib/create'),
@@ -12,13 +13,7 @@ var pub = module.exports,
         _: _
     };
 
-pub.mixin = function(klass) {
-    return {
-        inject: function(dependancies) {
-            _.extend(pub, klass(_.extend(DEPENDANCIES, dependancies)));
-        }
-    };
-};
+pub.mixin = mixin(DEPENDANCIES);
 
 pub.mixin(Search)
     .inject({
@@ -35,5 +30,3 @@ pub.mixin(Create)
         template: heinzelTemplate,
         config: heinzelConfig
     });
-
-
