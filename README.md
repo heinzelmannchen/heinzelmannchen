@@ -6,7 +6,7 @@
 heinzelmannchen
 ===============
 
-This repository acts as a facade for the underlying heinzelmannchen functionality, exposing an easy to use API.
+This repository acts as a facade for the underlying heinzelmannchen functionality, exposing an easy to use promise based API.
 
 [![Build Status](https://travis-ci.org/heinzelmannchen/heinzelmannchen.png?branch=master)](https://travis-ci.org/heinzelmannchen/heinzelmannchen)
 
@@ -22,26 +22,37 @@ heinzel.listTemplates()
   });
 
 //2. explore installable templates, it searches in npm, automatically adding the corresponding prefix 'heinzelmannchen-tpl-'
-heinzel.searchTemplates('templateName').then(onSearched);
+heinzel.searchTemplates('templateName')
+    .then(onSearched)
+    .fail(onFail);
 
 //if your template doesn't use standard heinzelmannchen prefixes, use:
-heinzel.search('templateName').then(onSearched);
+heinzel.search('templateName')
+    .then(onSearched)
+    .fail(onFail);
 
 //3. install desired template
-heinzel.install('heinzelmannchen-tpl-templateName').then(onInstalled);
+heinzel.install('heinzelmannchen-tpl-templateName')
+    .then(onInstalled)
+    .fail(onFail);
 
 //4. check local installed generators
-heinzel.listGenerators().then(onLoadedGenerators)
+heinzel.listGenerators()
+    .then(onLoadedGenerators)
+    .fail(onFail);
 
 //5. explore installable generators. As you can guess, it also searches in npm with following prefix: 'heinzelmannchen-gen-'
-heinzel.searchGenerator('generatorName').then(onSearched);
+heinzel.searchGenerator('generatorName')
+    .then(onSearched)
+    .fail(onFail);
 
 //6. install your generator
-heinzel.install('heinzelmannchen-gen-generatorName').then(onInstalled);
+heinzel.install('heinzelmannchen-gen-generatorName')
+    .then(onInstalled)
+    .fail(onFail);
 ```
 
-After installing you need to link the templates to their corresponding generators, here's an example (see [heinzelmannchen-config readme](https://github.com/heinzelmannchen/heinzelmannchen-config/blob/master/README.md#usage) for more information):
-
+After installing you need to link the templates to their corresponding generators, here's an example (See [Wiki](https://github.com/heinzelmannchen/BA-Stuff/wiki/Konfiguration---Heinzel) for explanations):
 ```
 {
     "domains": {
