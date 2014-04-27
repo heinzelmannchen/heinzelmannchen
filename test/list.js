@@ -4,7 +4,11 @@
         _: require('underscore'),
         config: {
             get: function() {
-                return configStub;
+                if (configStub) {
+                    return configStub;
+                } else {
+                    throw new Error();
+                }
             }
         }
     });
@@ -18,6 +22,12 @@ describe('list', function() {
                 };
 
                 return list.listGenerators().should.become(['pg']);
+            });
+
+            it('should throw an error if the config is not present', function() {
+                configStub = null;
+
+                return list.listGenerators().should.eventually.be.rejected;
             });
 
             it('should list a generator which is specified as an object', function() {
