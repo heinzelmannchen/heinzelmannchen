@@ -73,7 +73,7 @@ describe('create', function() {
         });
         it('should read the config for a given domain', function() {
             var promise = create('myDomain');
-            return promise.should.eventually.resolve;
+            return promise.should.eventually.be.fulfilled;
         });
     });
 });
