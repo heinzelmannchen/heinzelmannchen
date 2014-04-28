@@ -6,14 +6,25 @@ var pub = module.exports,
     heinzelTemplate = require('heinzelmannchen-template'),
     mixin = require('./lib/mixin'),
     Search = require('./lib/search'),
+    Explain = require('./lib/explain'),
     List = require('./lib/list'),
     Install = require('./lib/install'),
-    Create = require('./lib/create');
+    Create = require('./lib/create'),
+    GeneratorHelper = require('./lib/helper/generator'),
+    MINIMAL_DEPENDANCIES = {
+        Q: Q,
+        _: _
+    };
 
-pub.mixin = mixin({
-    Q: Q,
-    _: _
-});
+_.str = require('underscore.string');
+_.mixin(_.str.exports());
+
+pub.mixin = mixin(MINIMAL_DEPENDANCIES);
+
+pub.mixin(Explain)
+    .inject({
+        generatorHelper: new GeneratorHelper(MINIMAL_DEPENDANCIES)
+    });
 
 pub.mixin(Search)
     .inject({

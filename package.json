@@ -32,6 +32,7 @@
     "q": "~1.0.1",
     "heinzelmannchen-npm": "git://github.com/heinzelmannchen/heinzelmannchen-npm",
     "heinzelmannchen-config": "git://github.com/heinzelmannchen/heinzelmannchen-config",
-    "heinzelmannchen-template": "git://github.com/heinzelmannchen/heinzelmannchen-template"
+    "heinzelmannchen-template": "git://github.com/heinzelmannchen/heinzelmannchen-template",
+    "underscore.string": "~2.3.3"
   }
 }
