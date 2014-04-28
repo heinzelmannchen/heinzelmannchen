@@ -3,7 +3,7 @@ heinzel.create('extViews.formView', {
     override: true,
     ensurePathExists: true,
     filters: {
-        tables: ['heinzel']
+        tables: ['heinzel', 'occupation']
     }
 }).then(function(files) {
     console.log('done', files);
