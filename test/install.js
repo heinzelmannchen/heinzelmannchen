@@ -17,9 +17,13 @@ describe('install', function() {
         });
         it('should respond to install', function() {
             install.should.respondTo('install');
+            install.should.respondTo('installGenerators');
+            install.should.respondTo('installTemplates');
         });
         it('should respond to uninstall', function() {
             install.should.respondTo('uninstall');
+            install.should.respondTo('uninstallGenerators');
+            install.should.respondTo('uninstallTemplates');
         });
     });
     
@@ -91,9 +95,13 @@ describe('install', function() {
         });
     });
     
-    describe('#uninstall', function() {
-        var uninstallSpy = sinon.spy(),
-            install;
+    describe('uninstall', function() {
+        var install,
+            uninstallSpy = sinon.stub().returns((function () {
+                var q = Q.defer();
+                q.resolve();
+                return q.promise;
+            }()));
         beforeEach(function() {
             install = new Install(_.extend(injections, {
                 npm: {
@@ -104,6 +112,26 @@ describe('install', function() {
         it('should call npm.uninstall', function() {
             install.uninstall('module');
             uninstallSpy.should.have.been.calledWith('module');
+        });
+
+        it('should call npm.uninstall with the template prefix', function () {
+            install.uninstallTemplates('module');
+            uninstallSpy.should.have.been.calledWith(['heinzelmannchen-tpl-module']);
+        });
+
+        it('should call npm.uninstall with the generator prefix', function () {
+            install.uninstallGenerators('module');
+            uninstallSpy.should.have.been.calledWith(['heinzelmannchen-gen-module']);
+        });
+
+        it('should call npm.uninstall with the template prefix for multiple templates', function () {
+            install.uninstallTemplates(['module1', 'module2', 'module3']);
+            uninstallSpy.should.have.been.calledWith(['heinzelmannchen-tpl-module1', 'heinzelmannchen-tpl-module2', 'heinzelmannchen-tpl-module3']);
+        });
+
+        it('should call npm.uninstall with the generator prefix for multiple generators', function () {
+            install.uninstallGenerators(['module1', 'module2', 'module3']);
+            uninstallSpy.should.have.been.calledWith(['heinzelmannchen-gen-module1', 'heinzelmannchen-gen-module2', 'heinzelmannchen-gen-module3']);
         });
     });
 });
