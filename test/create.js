@@ -14,7 +14,7 @@ describe('create', function() {
             create.should.respondTo('create');
         });
     });
-    describe.skip('#create', function() {
+    describe('#create', function() {
         var configGetSpy = sinon.stub().returns({
             generator: 'myGenerator',
             template: 'myTemplate',
@@ -36,12 +36,6 @@ describe('create', function() {
                 var q = Q.defer();
                 output.should.be.eql('<%= heinzel %>.md');
                 content.should.be.eql('Hello anton');
-                options.should.be.eql({
-                    data: {
-                        heinzel: 'anton'
-                    },
-                    force: true
-                });
                 q.resolve('anton.md');
                 return q.promise;
             },
