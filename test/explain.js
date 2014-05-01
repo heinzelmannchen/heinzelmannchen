@@ -29,7 +29,7 @@ describe('explain', function() {
         it('should return a explanation of the generator', function() {
             var explain = new Explain({
                 _: _,
-                generatorHelper: require('../lib/helper/generator')({
+                requireHelper: require('../lib/helper/require')({
                     _: _,
                     Q: Q
                 })
@@ -40,7 +40,7 @@ describe('explain', function() {
         it('should be rejected if module not found', function() {
             var explain = new Explain({
                 _: _,
-                generatorHelper: require('../lib/helper/generator')({
+                requireHelper: require('../lib/helper/require')({
                     _: _,
                     Q: Q
                 })

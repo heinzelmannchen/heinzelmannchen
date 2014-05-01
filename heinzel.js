@@ -10,7 +10,7 @@ var pub = module.exports,
     List = require('./lib/list'),
     Install = require('./lib/install'),
     Create = require('./lib/create'),
-    GeneratorHelper = require('./lib/helper/generator'),
+    RequireHelper = require('./lib/helper/require'),
     MINIMAL_DEPENDANCIES = {
         Q: Q,
         _: _
@@ -23,7 +23,7 @@ pub.mixin = mixin(MINIMAL_DEPENDANCIES);
 
 pub.mixin(Explain)
     .inject({
-        generatorHelper: new GeneratorHelper(MINIMAL_DEPENDANCIES)
+        requireHelper: new RequireHelper(MINIMAL_DEPENDANCIES)
     });
 
 pub.mixin(Search)
