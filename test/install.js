@@ -1,9 +1,10 @@
 ﻿var Install = require('../lib/install'),
     sinon = require('sinon'),
+    Q = require('q'),
     _ = require('underscore'),
     injections = {
         _: _,
-        Q: require('q'),
+        Q: Q,
         prefix: require('../lib/prefix')
     },
     RequireHelper = require('../lib/helper/require');
@@ -39,8 +40,12 @@ describe('install', function() {
     });
 
     describe('#installGenerators', function () {
-        var installSpy = sinon.spy(),
-            install;
+        var install,
+            installSpy = sinon.stub().returns((function() {
+            var q = Q.defer();
+            q.resolve();
+            return q.promise;
+        }()));
         beforeEach(function () {
             install = new Install(_.extend(injections, {
                 npm: {
@@ -61,8 +66,12 @@ describe('install', function() {
     });
 
     describe('#installTemplates', function () {
-        var installSpy = sinon.spy(),
-            install;
+        var install,
+            installSpy = sinon.stub().returns((function() {
+                var q = Q.defer();
+                q.resolve();
+                return q.promise;
+            }()));
         beforeEach(function () {
             install = new Install(_.extend(injections, {
                 npm: {
