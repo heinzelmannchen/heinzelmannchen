@@ -134,4 +134,46 @@ describe('install', function() {
             uninstallSpy.should.have.been.calledWith(['heinzelmannchen-gen-module1', 'heinzelmannchen-gen-module2', 'heinzelmannchen-gen-module3']);
         });
     });
+
+    describe('update', function () {
+        var install,
+            updateSpy = sinon.stub().returns((function () {
+                var q = Q.defer();
+                q.resolve();
+                return q.promise;
+            }()));
+            
+        beforeEach(function () {
+            install = new Install(_.extend(injections, {
+                npm: {
+                    update: updateSpy
+                }
+            }));
+        });
+        it('should call npm.update', function () {
+            install.update('module');
+            updateSpy.should.have.been.calledWith('module');
+        });
+
+        it('should call npm.update without keywords', function () {
+            install.update('module');
+            updateSpy.should.have.been.calledWith();
+        });
+
+        it('should call npm.update with the generator prefix', function () {
+            install.updateGenerators('module');
+            updateSpy.should.have.been.calledWith(['heinzelmannchen-gen-module']);
+        });
+
+        it('should call npm.update with the template prefix for multiple templates', function () {
+            install.updateTemplates(['module1', 'module2', 'module3']);
+            updateSpy.should.have.been.calledWith(['heinzelmannchen-tpl-module1', 'heinzelmannchen-tpl-module2', 'heinzelmannchen-tpl-module3']);
+        });
+
+        it('should call npm.update with the generator prefix for multiple generators', function () {
+            install.updateGenerators(['module1', 'module2', 'module3']);
+            updateSpy.should.have.been.calledWith(['heinzelmannchen-gen-module1', 'heinzelmannchen-gen-module2', 'heinzelmannchen-gen-module3']);
+        });
+
+    });
 });
