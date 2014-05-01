@@ -10,8 +10,8 @@ describe('search', function() {
             search = new Search();
 
         });
-        it('should respond to searchGenerator', function() {
-            search.should.respondTo('searchGenerator');
+        it('should respond to searchGenerators', function() {
+            search.should.respondTo('searchGenerators');
         });
         it('should respond to searchTemplates', function() {
             search.should.respondTo('searchTemplates');
@@ -49,7 +49,7 @@ describe('search', function() {
         });
     });
 
-    describe('#searchGenerator', function() {
+    describe('#searchGenerators', function() {
         it('should call npm.search with the given keywords prefixed with heinzelmannchen-gen-', function() {
             var spy = sinon.spy();
             search = new Search({
@@ -59,7 +59,7 @@ describe('search', function() {
                     search: spy
                 }
             });
-            search.searchGenerator(['mysql', 'pg']);
+            search.searchGenerators(['mysql', 'pg']);
             spy.should.have.been.calledWith(['heinzelmannchen-gen-mysql', 'heinzelmannchen-gen-pg']);
         });
     });
