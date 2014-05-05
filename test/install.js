@@ -45,17 +45,18 @@ describe('install', function() {
 
     describe('#installGenerators', function () {
         var install,
-            installSpy = sinon.stub().returns((function() {
-            var q = Q.defer();
-            q.resolve();
-            return q.promise;
-        }()));
+            installSpy = createSinonStubPromise(),
+            configSpy = createSinonStubPromise();
+
         beforeEach(function () {
             install = new Install(_.extend(injections, {
                 npm: {
                     install: installSpy
                 },
-                requireHelper: new RequireHelper(injections)
+                requireHelper: new RequireHelper(injections),
+                heinzelConfig: {
+                    saveLocal: configSpy
+                }
             }));
         });
         it('should call npm.install with the generator prefix', function () {
@@ -67,21 +68,36 @@ describe('install', function() {
             install.installGenerators(['module1', 'module2', 'module3']);
             installSpy.should.have.been.calledWith(['heinzelmannchen-gen-module1', 'heinzelmannchen-gen-module2', 'heinzelmannchen-gen-module3']);
         });
+
+        it('shouldn\'t call heinzel config if no save flag is used', function () {
+            install.installGenerators('module');
+            return configSpy.should.not.have.been.called;
+        });
+
+        it.skip('should call heinzel config with the generator string', function () {
+            install.installGenerators('module', true);
+            return configSpy.should.have.been.calledWith('generators.heinzelmannchen-gen-module.npm');
+        });
     });
 
     describe('#installTemplates', function () {
         var install,
-            installSpy = sinon.stub().returns((function() {
+            installSpy = createSinonStubPromise(),
+            configSpy = sinon.stub().returns((function () {
                 var q = Q.defer();
                 q.resolve();
                 return q.promise;
             }()));
+
         beforeEach(function () {
             install = new Install(_.extend(injections, {
                 npm: {
                     install: installSpy
                 },
-                requireHelper: new RequireHelper(injections)
+                requireHelper: new RequireHelper(injections),
+                heinzelConfig: {
+                    saveLocal: configSpy
+                }
             }));
         });
         it('should call npm.install with the template prefix', function () {
@@ -93,15 +109,23 @@ describe('install', function() {
             install.installTemplates(['module1', 'module2', 'module3']);
             installSpy.should.have.been.calledWith(['heinzelmannchen-tpl-module1', 'heinzelmannchen-tpl-module2', 'heinzelmannchen-tpl-module3']);
         });
+
+        it('shouldn\'t call heinzel config if no save-flag is used', function () {
+            install.installTemplates('module');
+            return configSpy.should.not.have.been.called;
+        });
+
+        it.skip('should call heinzel config with the template string', function () {
+            install.installTemplates('module', true);
+            configSpy.should.have.been.calledOnce();
+            //return configSpy.should.have.been.calledWith('templates.heinzelmannchen-tpl-module.npm');
+            console.dir(configSpy);
+        });
     });
     
     describe('uninstall', function() {
         var install,
-            uninstallSpy = sinon.stub().returns((function () {
-                var q = Q.defer();
-                q.resolve();
-                return q.promise;
-            }()));
+            uninstallSpy = createSinonStubPromise();
         beforeEach(function() {
             install = new Install(_.extend(injections, {
                 npm: {
@@ -137,11 +161,7 @@ describe('install', function() {
 
     describe('update', function () {
         var install,
-            updateSpy = sinon.stub().returns((function () {
-                var q = Q.defer();
-                q.resolve();
-                return q.promise;
-            }()));
+            updateSpy = createSinonStubPromise();
             
         beforeEach(function () {
             install = new Install(_.extend(injections, {
@@ -177,3 +197,11 @@ describe('install', function() {
 
     });
 });
+
+function createSinonStubPromise(){
+    return sinon.stub().returns((function () {
+        var q = Q.defer();
+        q.resolve();
+        return q.promise;
+    }()));
+}
