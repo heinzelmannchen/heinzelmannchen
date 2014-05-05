@@ -77,7 +77,7 @@ describe('install', function() {
 
         it('should call heinzel config with the generator string', function () {
             return install.installGenerators('module', true).then(function () {
-                return configStub.should.have.been.calledWith('generators.heinzelmannchen-gen-module.npm');
+                return configStub.should.have.been.calledWith('generators.heinzelmannchen-gen-module');
             });
         });
     });
@@ -116,7 +116,7 @@ describe('install', function() {
 
         it('should call heinzel config with the template string', function () {
             return install.installTemplates(['module'], true).then(function () {
-                return configStub.should.have.been.calledWith('templates.heinzelmannchen-tpl-module.npm');
+                return configStub.should.have.been.calledWith('templates.heinzelmannchen-tpl-module');
             });
         });
 
@@ -128,6 +128,21 @@ describe('install', function() {
                         'git://github.com/heinzelmannchen/module5'];
             install.installTemplates(urls);
             installStub.should.have.been.calledWith(urls);
+        });
+
+        it('should call heinzel config with the repository name if it\'s an url or packagename', function () {
+            var packages = ['http://github.com/heinzelmannchen/module1.git',
+                            'https://github.com/heinzelmannchen/module2',
+                            'module3',
+                            'git://github.com/heinzelmannchen/module4',
+                            'http://github.com/heinzelmannchen/heinzel-tpl-foo.git#0.1.1/myfoo.tpl'];
+            return install.installTemplates(packages, true).then(function () {
+                return configStub.should.have.been.calledWith('templates.module1', 'http://github.com/heinzelmannchen/module1.git') &&
+                       configStub.should.have.been.calledWith('templates.module2', 'https://github.com/heinzelmannchen/module2') &&
+                       configStub.should.have.been.calledWith('templates.heinzelmannchen-tpl-module3', 'heinzelmannchen-tpl-module3') &&
+                       configStub.should.have.been.calledWith('templates.module4', 'git://github.com/heinzelmannchen/module4') &&
+                       configStub.should.have.been.calledWith('templates.myfoo', 'http://github.com/heinzelmannchen/heinzel-tpl-foo.git#0.1.1/myfoo.tpl');
+            });
         });
     });
     
