@@ -119,6 +119,16 @@ describe('install', function() {
                 return configStub.should.have.been.calledWith('templates.heinzelmannchen-tpl-module.npm');
             });
         });
+
+        it('should call npm.install without a prefix if it\'s an url', function () {
+            var urls = ['http://github.com/heinzelmannchen/module1.git',
+                        'https://github.com/heinzelmannchen/module2.git',
+                        'http://github.com/heinzelmannchen/module3',
+                        'https://github.com/heinzelmannchen/module4',
+                        'git://github.com/heinzelmannchen/module5'];
+            install.installTemplates(urls);
+            installStub.should.have.been.calledWith(urls);
+        });
     });
     
     describe('uninstall', function() {
