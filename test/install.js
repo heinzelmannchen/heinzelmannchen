@@ -54,7 +54,7 @@ describe('install', function() {
                     install: installStub
                 },
                 requireHelper: new RequireHelper(injections),
-                heinzelConfig: {
+                config: {
                     saveLocal: configStub
                 }
             }));
@@ -93,7 +93,7 @@ describe('install', function() {
                     install: installStub
                 },
                 requireHelper: new RequireHelper(injections),
-                heinzelConfig: {
+                config: {
                     saveLocal: configStub
                 }
             }));
@@ -156,7 +156,7 @@ describe('install', function() {
                     uninstall: uninstallStub
                 },
                 requireHelper: new RequireHelper(injections),
-                heinzelConfig: {
+                config: {
                     removeLocal: configStub
                 }
             }));
