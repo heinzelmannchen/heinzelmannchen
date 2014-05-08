@@ -43,7 +43,8 @@ pub.mixin(List)
 pub.mixin(Install)
     .inject({
         npm: heinzelNpm,
-        prefix: prefix
+        prefix: prefix,
+        config: heinzelConfig
     });
 
 pub.mixin(Create)
