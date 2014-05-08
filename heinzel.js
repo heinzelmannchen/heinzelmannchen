@@ -19,6 +19,9 @@ var pub = module.exports,
 
 _.str = require('underscore.string');
 _.mixin(_.str.exports());
+_.mixin({
+    hasInside: require('underscore.has-inside')
+});
 
 pub.mixin = mixin(MINIMAL_DEPENDANCIES);
 

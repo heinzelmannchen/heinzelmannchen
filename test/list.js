@@ -1,7 +1,8 @@
 ﻿var configStub = null,
+    _ = require('underscore'),
     list = require('../lib/list')({
         Q: require('q'),
-        _: require('underscore'),
+        _: _,
         config: {
             get: function() {
                 if (configStub) {
@@ -12,6 +13,10 @@
             }
         }
     });
+
+_.mixin({
+    hasInside: require('underscore.has-inside')
+});
 
 describe('list', function() {
     describe('#list', function() {
