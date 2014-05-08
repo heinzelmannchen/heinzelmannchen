@@ -79,18 +79,24 @@ describe('list', function() {
             it('should list multiple domains', function() {
                 configStub = {
                     extViews: {
-                        formView: {},
-                        listView: {},
+                        formView: {
+                            template: 'foo'
+                        },
+                        listView: {
+                            template: 'bar'
+                        },
                         generator: 'inline'
                     },
                     backend: {
-                        service: {},
+                        service: {
+                            template: 'bar'
+                        },
                         dal: {},
                         generator: 'inline'
                     }
                 };
 
-                return list.listDomains().should.become(['extViews', 'backend']);
+                return list.listDomains().should.eventually.be.like(['extViews','extViews.formView', 'extViews.listView', 'backend', 'backend.service']);
             });
         });
     });
