@@ -140,8 +140,7 @@ describe('install', function() {
                 return configStub.should.have.been.calledWith('templates.module1', 'http://github.com/heinzelmannchen/module1.git') &&
                        configStub.should.have.been.calledWith('templates.module2', 'https://github.com/heinzelmannchen/module2') &&
                        configStub.should.have.been.calledWith('templates.heinzelmannchen-tpl-module3', 'heinzelmannchen-tpl-module3') &&
-                       configStub.should.have.been.calledWith('templates.module4', 'git://github.com/heinzelmannchen/module4') &&
-                       configStub.should.have.been.calledWith('templates.myfoo', 'http://github.com/heinzelmannchen/heinzel-tpl-foo.git#0.1.1/myfoo.tpl');
+                       configStub.should.have.been.calledWith('templates.module4', 'git://github.com/heinzelmannchen/module4');
             });
         });
     });
