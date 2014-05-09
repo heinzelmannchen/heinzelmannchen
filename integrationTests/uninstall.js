@@ -1,4 +1,4 @@
 var heinzel = require('../heinzel');
-heinzel.uninstall('burnhub').then(function() {
+heinzel.uninstallGenerators('pg', true).then(function() {
     console.log('uninstalled');
 });

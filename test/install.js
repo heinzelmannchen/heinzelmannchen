@@ -54,7 +54,7 @@ describe('install', function() {
                     install: installStub
                 },
                 requireHelper: new RequireHelper(injections),
-                heinzelConfig: {
+                config: {
                     saveLocal: configStub
                 }
             }));
@@ -93,7 +93,7 @@ describe('install', function() {
                     install: installStub
                 },
                 requireHelper: new RequireHelper(injections),
-                heinzelConfig: {
+                config: {
                     saveLocal: configStub
                 }
             }));
@@ -140,45 +140,74 @@ describe('install', function() {
                 return configStub.should.have.been.calledWith('templates.module1', 'http://github.com/heinzelmannchen/module1.git') &&
                        configStub.should.have.been.calledWith('templates.module2', 'https://github.com/heinzelmannchen/module2') &&
                        configStub.should.have.been.calledWith('templates.heinzelmannchen-tpl-module3', 'heinzelmannchen-tpl-module3') &&
-                       configStub.should.have.been.calledWith('templates.module4', 'git://github.com/heinzelmannchen/module4') &&
-                       configStub.should.have.been.calledWith('templates.myfoo', 'http://github.com/heinzelmannchen/heinzel-tpl-foo.git#0.1.1/myfoo.tpl');
+                       configStub.should.have.been.calledWith('templates.module4', 'git://github.com/heinzelmannchen/module4');
             });
         });
     });
     
     describe('uninstall', function() {
         var install,
-            uninstallSpy = createSinonStubPromise();
+            uninstallStub = createSinonStubPromise(),
+            configStub = createSinonStubPromise();
+
         beforeEach(function() {
             install = new Install(_.extend(injections, {
                 npm: {
-                    uninstall: uninstallSpy
+                    uninstall: uninstallStub
+                },
+                requireHelper: new RequireHelper(injections),
+                config: {
+                    removeLocal: configStub
                 }
             }));
         });
         it('should call npm.uninstall', function() {
             install.uninstall('module');
-            uninstallSpy.should.have.been.calledWith('module');
+            uninstallStub.should.have.been.calledWith('module');
         });
 
         it('should call npm.uninstall with the template prefix', function () {
             install.uninstallTemplates('module');
-            uninstallSpy.should.have.been.calledWith(['heinzelmannchen-tpl-module']);
+            uninstallStub.should.have.been.calledWith(['heinzelmannchen-tpl-module']);
         });
 
         it('should call npm.uninstall with the generator prefix', function () {
             install.uninstallGenerators('module');
-            uninstallSpy.should.have.been.calledWith(['heinzelmannchen-gen-module']);
+            uninstallStub.should.have.been.calledWith(['heinzelmannchen-gen-module']);
         });
 
         it('should call npm.uninstall with the template prefix for multiple templates', function () {
             install.uninstallTemplates(['module1', 'module2', 'module3']);
-            uninstallSpy.should.have.been.calledWith(['heinzelmannchen-tpl-module1', 'heinzelmannchen-tpl-module2', 'heinzelmannchen-tpl-module3']);
+            uninstallStub.should.have.been.calledWith(['heinzelmannchen-tpl-module1', 'heinzelmannchen-tpl-module2', 'heinzelmannchen-tpl-module3']);
         });
 
         it('should call npm.uninstall with the generator prefix for multiple generators', function () {
             install.uninstallGenerators(['module1', 'module2', 'module3']);
-            uninstallSpy.should.have.been.calledWith(['heinzelmannchen-gen-module1', 'heinzelmannchen-gen-module2', 'heinzelmannchen-gen-module3']);
+            uninstallStub.should.have.been.calledWith(['heinzelmannchen-gen-module1', 'heinzelmannchen-gen-module2', 'heinzelmannchen-gen-module3']);
+        });
+
+        it('should call npm.uninstall without a prefix if it\'s an url', function () {
+            var urls = ['http://github.com/heinzelmannchen/module1.git',
+                        'https://github.com/heinzelmannchen/module2.git',
+                        'http://github.com/heinzelmannchen/module3',
+                        'https://github.com/heinzelmannchen/module4',
+                        'git://github.com/heinzelmannchen/module5'];
+            install.uninstallTemplates(urls);
+            uninstallStub.should.have.been.calledWith(urls);
+        });
+
+        it('should call heinzel config with the repository name if it\'s an url or packagename', function () {
+            var packages = ['http://github.com/heinzelmannchen/module1.git',
+                            'https://github.com/heinzelmannchen/module2',
+                            'module3',
+                            'git://github.com/heinzelmannchen/module4',
+                            'http://github.com/heinzelmannchen/heinzel-tpl-foo.git#0.1.1/myfoo.tpl'];
+            return install.uninstallTemplates(packages, true).then(function () {
+                return configStub.should.have.been.calledWith('templates.module1', 'http://github.com/heinzelmannchen/module1.git') &&
+                       configStub.should.have.been.calledWith('templates.module2', 'https://github.com/heinzelmannchen/module2') &&
+                       configStub.should.have.been.calledWith('templates.heinzelmannchen-tpl-module3', 'heinzelmannchen-tpl-module3') &&
+                       configStub.should.have.been.calledWith('templates.module4', 'git://github.com/heinzelmannchen/module4');
+            });
         });
     });
 
