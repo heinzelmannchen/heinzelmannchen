@@ -4,7 +4,7 @@
   "description": "template engine",
   "main": "heinzel.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
