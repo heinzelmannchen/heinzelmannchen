@@ -11,6 +11,7 @@ var pub = module.exports,
     List = require('./lib/list'),
     Install = require('./lib/install'),
     Create = require('./lib/create'),
+    Init = require('./lib/init'),
     RequireHelper = require('./lib/helper/require'),
     MINIMAL_DEPENDANCIES = {
         Q: Q,
@@ -51,4 +52,11 @@ pub.mixin(Create)
     .inject({
         template: heinzelTemplate,
         config: heinzelConfig
+    });
+
+pub.mixin(Init)
+    .inject({
+        template: heinzelTemplate,
+        installTemplates: pub.installTemplates,
+        resolvePackageNameFromUrl: pub.resolvePackageNameFromUrl
     });

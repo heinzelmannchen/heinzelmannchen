@@ -1,4 +1,8 @@
 var configStub = null,
+    DEFAULT_WRITE_OPTIONS = {
+        force: false,
+        override: false
+    },
     _ = require('underscore'),
     Q = require('q'),
     sinon = require('sinon'),
@@ -28,18 +32,17 @@ describe('init', function() {
                     templateFromNpm: function(template, data) {
                         var q = Q.defer();
                         templateSpy(template, data);
-                        q.resolve();
+                        q.resolve('content');
                         return q.promise;
                     }
                 },
-                install: {
-                    installTemplates: function(template) {
-                        var q = Q.defer();
-                        installSpy(template);
-                        q.resolve(['default-config']);
-                        return q.promise;
-                    }
-                }
+                installTemplates: function(template) {
+                    var q = Q.defer();
+                    installSpy(template);
+                    q.resolve(['default-config']);
+                    return q.promise;
+                },
+                resolvePackageNameFromUrl: function() {return arguments;}
             });
         });
 
@@ -57,6 +60,11 @@ describe('init', function() {
                 });
         });
 
-        it.skip('should write the config to ./.heinzelrc', function() {});
+        it('should write the config to ./.heinzelrc', function() {
+            return init.init('default-config', 'heinzelrc.tpl', {})
+                .then(function() {
+                    return writeSpy.should.have.been.calledWith('.heinzelrc', 'content');
+                });
+        });
     });
 });
