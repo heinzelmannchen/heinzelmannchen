@@ -56,7 +56,7 @@ describe('init', function() {
         it('should process the default config template', function() {
             return init.init('default-config', 'heinzelrc.tpl', {})
                 .then(function() {
-                    return templateSpy.should.have.been.calledWith('default-config/heinzelrc.tpl', {});
+                    return templateSpy.should.have.been.calledWith('default-config/heinzelrc.tpl', { data: {}});
                 });
         });
 
