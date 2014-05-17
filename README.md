@@ -3,8 +3,7 @@
          align="right" valign="top" alt="Promises/A+ logo" />
 </a>
 
-heinzelmannchen
-===============
+![logo](https://raw.githubusercontent.com/heinzelmannchen/heinzelmannchen/master/Heinzelmannchen.png)
 
 This repository acts as a facade for the underlying heinzelmannchen functionality, exposing an easy to use promise based API.
 
