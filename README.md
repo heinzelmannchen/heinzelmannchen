@@ -1,9 +1,8 @@
+![logo](https://raw.githubusercontent.com/heinzelmannchen/heinzelmannchen/master/Heinzelmannchen.png)
 <a href="http://promises-aplus.github.com/promises-spec">
     <img src="http://promises-aplus.github.com/promises-spec/assets/logo-small.png"
          align="right" valign="top" alt="Promises/A+ logo" />
 </a>
-
-![logo](https://raw.githubusercontent.com/heinzelmannchen/heinzelmannchen/master/Heinzelmannchen.png)
 
 This repository acts as a facade for the underlying heinzelmannchen functionality, exposing an easy to use promise based API.
 
