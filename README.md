@@ -16,8 +16,8 @@ var heinzel = require('heinzelmannchen');
 
 //1. check local installed templates
 heinzel.listTemplates()
-  .then(function(templates) { 
-    console.log(templates); 
+  .then(function(templates) {
+    console.log(templates);
   });
 
 //2. explore installable templates, it searches in npm, automatically adding the corresponding prefix 'heinzelmannchen-tpl-'
