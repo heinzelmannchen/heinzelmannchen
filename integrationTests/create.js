@@ -1,6 +1,6 @@
 var heinzel = require('../heinzel');
 heinzel.create('extViews', {
-    //override: true,
+    override: true,
     ensurePathExists: true,
     filters: {
         tables: ['heinzel', 'occupation']
