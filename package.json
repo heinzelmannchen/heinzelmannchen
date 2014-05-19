@@ -34,7 +34,8 @@
     "underscore": "~1.6.0",
     "underscore.has-inside": "~1.0.1",
     "heinzelmannchen-config": "~1.0.0",
-    "heinzelmannchen-template": "~1.0.1",
-    "heinzelmannchen-npm": "~1.0.0"
+    "heinzelmannchen-template": "~1.0.2",
+    "heinzelmannchen-npm": "~1.0.0",
+    "heinzelmannchen-gen-ask": "~1.0.0"
   }
 }

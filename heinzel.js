@@ -58,5 +58,6 @@ pub.mixin(Init)
     .inject({
         template: heinzelTemplate,
         installTemplates: pub.installTemplates,
-        resolvePackageNameFromUrl: pub.resolvePackageNameFromUrl
+        resolvePackageNameFromUrl: pub.resolvePackageNameFromUrl,
+        ask: require('heinzelmannchen-gen-ask')
     });
