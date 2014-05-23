@@ -1,10 +1,11 @@
+
 {
     "domains": {
     },
     "generators": {
-        
+        "undefined" : "undefined"
     },
     "templates": {
-        
+        "undefined" : "undefined"
     }
 }
