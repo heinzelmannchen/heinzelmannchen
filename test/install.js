@@ -76,7 +76,7 @@ describe('install', function() {
         });
 
         it('should call heinzel config with the generator string', function () {
-            return install.installGenerators('module', true).then(function () {
+            return install.installGenerators('module', { saveInConfig: true }).then(function () {
                 return configStub.should.have.been.calledWith('generators.heinzelmannchen-gen-module');
             });
         });
@@ -115,7 +115,7 @@ describe('install', function() {
         });
 
         it('should call heinzel config with the template string', function () {
-            return install.installTemplates(['module'], true).then(function () {
+            return install.installTemplates(['module'], { saveInConfig: true }).then(function () {
                 return configStub.should.have.been.calledWith('templates.heinzelmannchen-tpl-module');
             });
         });
@@ -135,8 +135,10 @@ describe('install', function() {
                             'https://github.com/heinzelmannchen/module2',
                             'module3',
                             'git://github.com/heinzelmannchen/module4',
-                            'http://github.com/heinzelmannchen/heinzel-tpl-foo.git#0.1.1/myfoo.tpl'];
-            return install.installTemplates(packages, true).then(function () {
+                            'http://github.com/heinzelmannchen/heinzel-tpl-foo.git#0.1.1/myfoo.tpl'],
+				options = { saveInConfig: true };
+				
+            return install.installTemplates(packages, options).then(function () {
                 return configStub.should.have.been.calledWith('templates.module1', 'http://github.com/heinzelmannchen/module1.git') &&
                        configStub.should.have.been.calledWith('templates.module2', 'https://github.com/heinzelmannchen/module2') &&
                        configStub.should.have.been.calledWith('templates.heinzelmannchen-tpl-module3', 'heinzelmannchen-tpl-module3') &&
