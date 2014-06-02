@@ -4,7 +4,9 @@
          align="right" valign="top" alt="Promises/A+ logo" />
 </a>
 
-This repository acts as a facade for the underlying heinzelmannchen functionality, exposing an easy to use promise based API.
+Heinzelmannchen is a little helper for your daily work. It is used to create code from your templates.
+This module acts as a facade for the underlying heinzelmannchen functionality, exposing an easy to use promise based API.
+If you like to use Heinzelmannchen in your workflow checkout [heinzelmannchen-cli](https://github.com/heinzelmannchen/heinzelmannchen-cli).
 
 [![Build Status](https://travis-ci.org/heinzelmannchen/heinzelmannchen.png?branch=master)](https://travis-ci.org/heinzelmannchen/heinzelmannchen)
 
