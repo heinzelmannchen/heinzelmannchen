@@ -50,5 +50,6 @@ pub.mixin(Install)
 pub.mixin(Create)
     .inject({
         template: heinzelTemplate,
-        config: heinzelConfig
+        config: heinzelConfig,
+        requireHelper: new RequireHelper(MINIMAL_DEPENDANCIES)
     });
