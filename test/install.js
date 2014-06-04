@@ -10,7 +10,7 @@
     RequireHelper = require('../lib/helper/require');
 
 describe('install', function() {
-    describe('interface', function() {
+    describe('interface', function () {
         var install;
         beforeEach(function() {
             install = new Install();
@@ -27,7 +27,7 @@ describe('install', function() {
         });
     });
     
-    describe('#install', function() {
+    describe('#install', function () {
         var installSpy = sinon.spy(),
             install;
         beforeEach(function() {
@@ -78,6 +78,25 @@ describe('install', function() {
         it('should call heinzel config with the generator string', function () {
             return install.installGenerators('module', { saveInConfig: true }).then(function () {
                 return configStub.should.have.been.calledWith('generators.heinzelmannchen-gen-module');
+            });
+        });
+
+        it('shouldn\'t add to config if it\'s already there', function () {
+            configStub = createSinonStubPromise();
+            install = new Install(_.extend(injections, {
+                npm: {
+                    install: installStub
+                },
+                requireHelper: new RequireHelper(injections),
+                config: {
+                    saveLocal: configStub,
+                    get: sinon.stub().returns(function () {
+                        throw new Error('not in config');
+                    })
+                }
+            }));
+            return install.installGenerators('module', { saveInConfig: true }).then(function () {
+                return configStub.should.not.have.been.called;
             });
         });
     });
@@ -147,7 +166,7 @@ describe('install', function() {
         });
     });
     
-    describe('uninstall', function() {
+    describe('uninstall', function () {
         var install,
             uninstallStub = createSinonStubPromise(),
             configStub = createSinonStubPromise();
