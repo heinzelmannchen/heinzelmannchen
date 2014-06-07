@@ -1,6 +1,6 @@
 {
   "name": "heinzelmannchen",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "template engine",
   "main": "heinzel.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "underscore": "~1.6.0",
     "underscore.has-inside": "~1.0.1",
     "heinzelmannchen-config": "~1.0.1",
-    "heinzelmannchen-template": "~1.0.3",
+    "heinzelmannchen-template": "~1.0.6",
     "heinzelmannchen-npm": "~1.2.1"
   }
 }
