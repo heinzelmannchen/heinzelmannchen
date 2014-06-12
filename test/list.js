@@ -14,9 +14,7 @@
         }
     });
 
-_.mixin({
-    hasInside: require('underscore.has-inside')
-});
+_.mixin(require('underscore.has-inside'));
 
 describe('list', function() {
     describe('#list', function() {
