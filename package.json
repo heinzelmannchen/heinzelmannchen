@@ -1,6 +1,6 @@
 {
   "name": "heinzelmannchen",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "template engine",
   "main": "heinzel.js",
   "scripts": {
